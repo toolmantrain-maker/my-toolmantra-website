@@ -1,125 +1,105 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>जमीन खरीदने से पहले जांचें: भूमि और संपत्ति जांच टूल | ToolMantra</title>
-    <meta name="description" content="जमीन खरीदने से पहले कानूनी दस्तावेजों और भूमि के इतिहास की ऑनलाइन जांच करें। हमारा फ्री 'जमीन जांच' टूल आपकी मदद करेगा।">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .tool-icon {
-            font-size: 72px; 
-            display: block;
-            margin-bottom: 15px; 
-        }
-    </style>
-</head>
-<body>
+<script>
+    const stateSelect = document.getElementById('state');
+    const districtSelect = document.getElementById('district');
+    const jaanchForm = document.getElementById('jaanch-form');
+    const resultsSection = document.getElementById('results-section');
 
-    <header>
-        <div class="container">
-            <div class="logo">ToolMantra</div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">All Tools</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="tool-container">
-            <div class="tool-content">
-                <h2>जमीन जांच सहायक</h2>
-                <p>जमीन खरीदने से पहले अपने राज्य और ज़िले की पूरी कानूनी जानकारी प्राप्त करें।</p>
-                
-                <form id="jaanch-form">
-                    <div class="form-group">
-                        <label for="state">राज्य चुनें:</label>
-                        <select id="state" name="state" required>
-                            <option value="">-- एक राज्य चुनें --</option>
-                            <option value="up">उत्तर प्रदेश</option>
-                            <option value="mh">महाराष्ट्र</option>
-                            <option value="rj">राजस्थान</option>
-                            <option value="hr">हरियाणा</option>
-                            <option value="mp">मध्य प्रदेश</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="district">ज़िला चुनें:</label>
-                        <select id="district" name="district" required>
-                            <option value="">-- पहले राज्य चुनें --</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="cta-button">जानकारी प्राप्त करें</button>
-                </form>
-
-                <div id="results-section" style="display: none;">
-                    <h3>आपके चुने हुए स्थान के लिए जानकारी</h3>
-                    </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>ToolMantra</h3>
-                    <p>ToolMantra India ka pehla aisa free toolbox hai jo aam aadmi ki roz ki samasyaon ka aasan banata hai. Humara lakshya har Bhartiya ko zaroori digital tools muft mein pradana karna hai.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#">All Tools</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2024 ToolMantra. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const stateSelect = document.getElementById('state');
-        const districtSelect = document.getElementById('district');
-
-        const districts = {
-            up: ['लखनऊ', 'कानपुर', 'वाराणसी', 'प्रयागराज'],
-            mh: ['मुंबई', 'पुणे', 'नागपुर', 'नाशिक'],
-            rj: ['जयपुर', 'उदयपुर', 'जोधपुर', 'अजमेर'],
-            hr: ['गुरुग्राम', 'फरीदाबाद', 'पंचकुला', 'अंबाला'],
-            mp: ['भोपाल', 'इंदौर', 'जबलपुर', 'ग्वालियर'],
-        };
-
-        stateSelect.addEventListener('change', () => {
-            const selectedState = stateSelect.value;
-            districtSelect.innerHTML = '<option value="">-- एक ज़िला चुनें --</option>'; // Reset districts
-            
-            if (selectedState) {
-                districts[selectedState].forEach(district => {
-                    const option = document.createElement('option');
-                    option.value = district;
-                    option.textContent = district;
-                    districtSelect.appendChild(option);
-                });
+    const stateData = {
+        up: {
+            name: 'उत्तर प्रदेश',
+            districts: ['लखनऊ', 'कानपुर', 'वाराणसी', 'प्रयागराज'],
+            info: {
+                documents: ['7/12 (खसरा)', 'खतौनी', 'फर्द', 'रजिस्ट्री'],
+                permissions: 'कृषि भूमि को गैर-कृषि भूमि में बदलने के लिए SDM की अनुमति ज़रूरी है।',
+                risks: 'भूमि रिकॉर्ड ऑनलाइन ज़रूर जांचें। किसी भी कानूनी विवाद की जांच करें।',
+                links: ['उत्तर प्रदेश भूलेख: <a href="http://bhulekh.up.nic.in/" target="_blank">bhulekh.up.nic.in</a>']
             }
-        });
-    </script>
-</body>
-</html>
+        },
+        mh: {
+            name: 'महाराष्ट्र',
+            districts: ['मुंबई', 'पुणे', 'नागपुर', 'नाशिक'],
+            info: {
+                documents: ['7/12 (Satbara Utara)', '8A (Aath-A)', 'इंडेक्स-2'],
+                permissions: 'भूमि रूपांतरण (Land Conversion) के लिए कलेक्टर की अनुमति चाहिए।',
+                risks: 'कृषि भूमि की बिक्री में स्थानीय कानूनों का ध्यान रखें।',
+                links: ['महाराष्ट्र भूलेख: <a href="https://bhulekh.mahabhumi.gov.in/" target="_blank">bhulekh.mahabhumi.gov.in</a>']
+            }
+        },
+        rj: {
+            name: 'राजस्थान',
+            districts: ['जयपुर', 'उदयपुर', 'जोधपुर', 'अजमेर'],
+            info: {
+                documents: ['जमाबंदी', 'गिरदावरी', 'फर्द'],
+                permissions: 'कृषि भूमि के लिए तहसीलदार से अनुमति चाहिए।',
+                risks: 'शहरी क्षेत्रों में भूमि के रिकॉर्ड ऑनलाइन जांचें।',
+                links: ['अपना खाता राजस्थान: <a href="http://apnakhata.raj.nic.in/" target="_blank">apnakhata.raj.nic.in</a>']
+            }
+        },
+        hr: {
+            name: 'हरियाणा',
+            districts: ['गुरुग्राम', 'फरीदाबाद', 'पंचकुला', 'अंबाला'],
+            info: {
+                documents: ['जमाबंदी', 'नक्शा', 'शजरा'],
+                permissions: 'सरकार द्वारा निर्धारित शहरी विकास क्षेत्रों में भूमि खरीदने से पहले नियमों की जांच करें।',
+                risks: 'छोटे टुकड़ों में बंटी हुई ज़मीन खरीदने से बचें।',
+                links: ['जमाबंदी हरियाणा: <a href="https://jamabandi.nic.in/" target="_blank">jamabandi.nic.in</a>']
+            }
+        },
+        mp: {
+            name: 'मध्य प्रदेश',
+            districts: ['भोपाल', 'इंदौर', 'जबलपुर', 'ग्वालियर'],
+            info: {
+                documents: ['खसरा', 'खतौनी', 'नक्शा'],
+                permissions: 'कृषि भूमि को आवासीय भूमि में बदलने की प्रक्रिया के लिए स्थानीय नियमों का पालन करें।',
+                risks: 'किसी भी विवादित ज़मीन की खरीद से पहले कानूनी सलाह लें।',
+                links: ['भूलेख मध्य प्रदेश: <a href="https://mpbhulekh.gov.in/" target="_blank">mpbhulekh.gov.in</a>']
+            }
+        }
+    };
+
+    stateSelect.addEventListener('change', () => {
+        const selectedState = stateSelect.value;
+        districtSelect.innerHTML = '<option value="">-- एक ज़िला चुनें --</option>';
+        
+        if (selectedState) {
+            stateData[selectedState].districts.forEach(district => {
+                const option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                districtSelect.appendChild(option);
+            });
+        }
+    });
+
+    jaanchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const selectedState = stateSelect.value;
+        const selectedDistrict = districtSelect.value;
+
+        if (!selectedState || !selectedDistrict) {
+            alert('कृपया राज्य और ज़िला दोनों चुनें।');
+            return;
+        }
+
+        const info = stateData[selectedState].info;
+        const resultsHtml = `
+            <h4>राज्य: ${stateData[selectedState].name}</h4>
+            <h4>ज़िला: ${selectedDistrict}</h4>
+            <br>
+            <h5>ज़रूरी दस्तावेज़:</h5>
+            <ul>
+                ${info.documents.map(doc => `<li>${doc}</li>`).join('')}
+            </ul>
+            <h5>सरकारी परमिशन:</h5>
+            <p>${info.permissions}</p>
+            <h5>फ्रॉड से बचने का तरीका:</h5>
+            <p>${info.risks}</p>
+            <h5>सरकारी पोर्टल:</h5>
+            <p>${info.links.join('<br>')}</p>
+        `;
+        
+        resultsSection.innerHTML = resultsHtml;
+        resultsSection.style.display = 'block';
+    });
+</script>
