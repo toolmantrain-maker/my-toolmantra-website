@@ -59,7 +59,7 @@
 
     stateSelect.addEventListener('change', () => {
         const selectedState = stateSelect.value;
-        districtSelect.innerHTML = '<option value="">-- एक ज़िला चुनें --</option>';
+        districtSelect.innerHTML = '<option value="">-- एक ज़िला चुनें --</option>'; // Reset districts
         
         if (selectedState) {
             stateData[selectedState].districts.forEach(district => {
