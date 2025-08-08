@@ -305,4 +305,12 @@ footer {
 .copyright p {
     font-size: 14px;
     color: #888;
+
+}
+
+/* Emojis ko bada karne aur unhe text se alag karne ke liye */
+.tool-icon {
+    font-size: 72px; 
+    display: block;
+    margin-bottom: 15px; 
 }
