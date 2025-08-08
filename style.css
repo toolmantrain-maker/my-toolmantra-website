@@ -314,3 +314,67 @@ footer {
     display: block;
     margin-bottom: 15px; 
 }
+
+/* Jaanch tool ke liye CSS */
+.tool-container {
+    padding: 60px 20px;
+    background-color: #f7f9fc;
+}
+
+.tool-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.tool-content h2 {
+    font-size: 36px;
+    color: #4a148c;
+    margin-bottom: 10px;
+}
+
+.tool-content p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #4a148c;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.tool-content .cta-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+#results-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: left;
+}
+
